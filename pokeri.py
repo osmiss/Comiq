@@ -34,20 +34,30 @@ def isFlush(hand):             # Metodi, joka tarkistaa kadesta mahdollisen vari
 def isStraight(hand):          # Metodi, joka tarkistaa kadesta mahdollisen suoran. Saa parametrina tarkasteltavan kaden
     card = hand[0]
     cardnumber = card[0]
+    card2 = hand[1]
+    nextcardnumber = card2[0]
     returnable = False
-    for i in range(1, 5):
-        nextcard = hand[i]
-        if cardnumber + 1 == nextcard[0]:
-            returnable = True
-        else:
-            returnable = False
-            break
-    if cardnumber == 1:
+    if cardnumber == 1 and nextcardnumber != 2:
         cardnumber = 14
+        card = (cardnumber, card[1])
+        del hand[0]
+        hand.append(card)
+        card = hand[0]
+        cardnumber = card[0]
         for i in range(1, 5):
             nextcard = hand[i]
             if cardnumber + 1 == nextcard[0]:
                 returnable = True
+                cardnumber += 1
+            else:
+                returnable = False
+                break
+    else:
+        for i in range(1, 5):
+            nextcard = hand[i]
+            if cardnumber + 1 == nextcard[0]:
+                returnable = True
+                cardnumber += 1
             else:
                 returnable = False
                 break
