@@ -1,128 +1,141 @@
 import random
 
 
-def luoPakka():            # Metodi, joka muodostaa pakan. Pakka on lista, jossa kortit ovat tuple muotoisia muuttujia
-    numerot = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    maat = ["pata", "risti", "ruutu", "hertta"]
-    pakka = []
+def createDeck():            # Metodi, joka muodostaa pakan. pakka on lista, jossa kortit ovat tuple muotoisia muuttujia
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    suits = ["pata", "risti", "ruutu", "hertta"]
+    deck = []
     i = 0
     j = 0
     while True:
-        pakka += [(numerot[i], maat[j])]
+        deck += [(numbers[i], suits[j])]
         i += 1
         if i == 13:
             j += 1
             i = 0
             if j == 4:
                 break
-    return pakka
+    return deck
 
 
-def onkoVari(kasi):             # Metodi, joka tarkistaa kädestä mahdollisen värin. Saa parametrina tarkasteltavan käden
-    tarkasteltavakortti = kasi[0]
-    maa = tarkasteltavakortti[1]
-    palautettava = False
-    for x in kasi:
-        if maa == x[1]:
-            palautettava = True
+def isFlush(hand):             # Metodi, joka tarkistaa kädestä mahdollisen värin. Saa parametrina tarkasteltavan käden
+    firstcard = hand[0]
+    suit = firstcard[1]
+    returnable = False
+    for x in hand:
+        if suit == x[1]:
+            returnable = True
         else:
-            palautettava = False
+            returnable = False
             break
-    return palautettava
+    return returnable
 
 
-def onkoSuora(kasi):           # Metodi, joka tarkistaa kädestä mahdollisen suoran. Saa parametrina tarkasteltavan käden
-    kortti = kasi[0]
-    kn = kortti[0]
-    palautettava = False
+def isStraight(hand):          # Metodi, joka tarkistaa kädestä mahdollisen suoran. Saa parametrina tarkasteltavan käden
+    card = hand[0]
+    cardnumber = card[0]
+    returnable = False
     for i in range(1, 5):
-        seuraavakortti = kasi[i]
-        if kn + 1 == seuraavakortti[0]:
-            palautettava = True
+        nextcard = hand[i]
+        if cardnumber + 1 == nextcard[0]:
+            returnable = True
         else:
-            palautettava = False
+            returnable = False
             break
-    if kn == 1:
-        kn = 14
+    if cardnumber == 1:
+        cardnumber = 14
         for i in range(1, 5):
-            seuraavakortti = kasi[i]
-            if kn + 1 == seuraavakortti[0]:
-                palautettava = True
+            nextcard = hand[i]
+            if cardnumber + 1 == nextcard[0]:
+                returnable = True
             else:
-                palautettava = False
+                returnable = False
                 break
-    return palautettava
+    return returnable
 
 
-def onkoKaksiparia(kasi):  # Metodi, joka tarkistaa kädestä mahdollisen kaksi pari. Saa parametrina tarkasteltavan käden
-    palautettava = False
-    kortti1 = kasi[0]
-    kn1 = kortti1[0]
-    kortti2 = kasi[1]
-    kn2 = kortti2[0]
-    kortti3 = kasi[2]
-    kn3 = kortti3[0]
-    kortti4 = kasi[3]
-    kn4 = kortti4[0]
-    kortti5 = kasi[4]
-    kn5 = kortti5[0]
-    if kn1 == kn2 and kn3 != kn2:
-        if kn3 == kn4 and kn4 != kn5:
-            palautettava = True
-        elif kn4 == kn5 and kn4 != kn3:
-            palautettava = True
-    if kn1 != kn2:
-        if kn2 == kn3 and kn3 != kn4 and kn4 == kn5:
-            palautettava = True
-    return palautettava
+def isTwopair(hand):  # Metodi, joka tarkistaa kädestä mahdollisen kaksi pari. Saa parametrina tarkasteltavan käden
+    returnable = False
+    card1 = hand[0]
+    cardnumber1 = card1[0]
+    card2 = hand[1]
+    cardnumber2 = card2[0]
+    card3 = hand[2]
+    cardnumber3 = card3[0]
+    card4 = hand[3]
+    cardnumber4 = card4[0]
+    card5 = hand[4]
+    cardnumber5 = card5[0]
+    if cardnumber1 == cardnumber2 and cardnumber3 != cardnumber2:
+        if cardnumber3 == cardnumber4 and cardnumber4 != cardnumber5:
+            returnable = True
+        elif cardnumber4 == cardnumber5 and cardnumber4 != cardnumber3:
+            returnable = True
+    if cardnumber1 != cardnumber2:
+        if cardnumber2 == cardnumber3 and cardnumber3 != cardnumber4 and cardnumber4 == cardnumber5:
+            returnable = True
+    return returnable
 
 
-def numeroidenMuunto(kasi):         # Muuntaa ässän, kuninkaan, kuningattaren ja jätkän arvon kirjaimeksi tulosteeseen
+def numberToletter(hand):         # Muuntaa ässän, kuninkaan, kuningattaren ja jätkän arvon kirjaimeksi tulosteeseen
     for i in range(0, 5):
-        kortti = kasi[i]
-        kn = kortti[0]
-        if kn == 1:
-            kn = 'A'
-            kasi[i] = (kn, kortti[1])
-        elif kn == 11:
-            kn = 'J'
-            kasi[i] = (kn, kortti[1])
-        elif kn == 12:
-            kn = 'Q'
-            kasi[i] = (kn, kortti[1])
-        elif kn == 13:
-            kn = 'K'
-            kasi[i] = (kn, kortti[1])
-    return kasi
+        card = hand[i]
+        cardnumber = card[0]
+        if cardnumber == 1:
+            cardnumber = 'A'
+            hand[i] = (cardnumber, card[1])
+        elif cardnumber == 11:
+            cardnumber = 'J'
+            hand[i] = (cardnumber, card[1])
+        elif cardnumber == 12:
+            cardnumber = 'Q'
+            hand[i] = (cardnumber, card[1])
+        elif cardnumber == 13:
+            cardnumber = 'K'
+            hand[i] = (cardnumber, card[1])
+    return hand
 
 
-pakka = luoPakka()      # Ohjelman alku, josta kutsutaan pakan luovaa metodia
-random.shuffle(pakka)   # Pakan sekoitus
-kasi1 = []
-kasi2 = []
-kasi3 = []
-kadet = [kasi1, kasi2, kasi3]
-while len(kasi1) < 5:           # Korttien jako pelaajille
-    kasi1.append(pakka[0])
-    del pakka[0]
-    kasi2.append(pakka[0])
-    del pakka[0]
-    kasi3.append(pakka[0])
-    del pakka[0]
-pelaajannumero = 1
-for x in kadet:               # Käsien tulostus ja tarkistus, joka tulostaa joko etsityn käden tai "ei mitään haetuista"
-    tulostettava = numeroidenMuunto(x[:])
-    print("pelaajan " + str(pelaajannumero) + " kasi: " + str(tulostettava))
-    x.sort()               # Järjestetään kädet järjestykseen pienimmästä suurimpaan käsien tarkistuksen helpottamiseksi
-    if onkoVari(x):
-        if onkoSuora(x):
-            print("pelaajalla " + str(pelaajannumero) + " Varisuora")
+def deal(deck):
+    hand1 = []
+    hand2 = []
+    hand3 = []
+    hands = [hand1, hand2, hand3]
+    while len(hand1) < 5:           # korttien jako pelaajille
+        hand1.append(deck[0])
+        del deck[0]
+        hand2.append(deck[0])
+        del deck[0]
+        hand3.append(deck[0])
+        del deck[0]
+    return hands
+
+
+def checkAndprintcards(hands):
+    playernumber = 1
+    for x in hands:           # Käsien tulostus ja tarkistus, joka tulostaa joko etsityn käden tai "ei mitään haetuista"
+        printedhand = numberToletter(x[:])
+        print("pelaajan " + str(playernumber) + " hand: " + str(printedhand))
+        x.sort()           # Järjestetään kädet järjestykseen pienimmästä suurimpaan käsien tarkistuksen helpottamiseksi
+        if isFlush(x):
+            if isStraight(x):
+                print("pelaajalla " + str(playernumber) + " Varisuora")
+            else:
+                print("pelaajalla " + str(playernumber) + " Vari")
+        elif isStraight(x):
+            print("pelaajalla " + str(playernumber) + " Suora")
+        elif isTwopair(x):
+            print("pelaajalla " + str(playernumber) + " Kaksi paria")
         else:
-            print("pelaajalla " + str(pelaajannumero) + " Vari")
-    elif onkoSuora(x):
-        print("pelaajalla " + str(pelaajannumero) + " Suora")
-    elif onkoKaksiparia(x):
-        print("pelaajalla " + str(pelaajannumero) + " Kaksi paria")
-    else:
-        print("pelaajalla " + str(pelaajannumero) + " Ei mitaan haetuista")
-    pelaajannumero += 1
+            print("pelaajalla " + str(playernumber) + " Ei mitaan haetuista")
+        playernumber += 1
+
+
+def start():
+    deck = createDeck()  # Ohjelman alku, josta kutsutaan pakan muodostavaa metodia
+    random.shuffle(deck)  # Pakan sekoitus
+    hands = deal(deck)
+    checkAndprintcards(hands)
+
+
+start()  # Ohjelman käynnistävä komento
