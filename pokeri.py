@@ -18,7 +18,7 @@ def createDeck():            # Metodi, joka muodostaa pakan. pakka on lista, jos
     return deck
 
 
-def isFlush(hand):             # Metodi, joka tarkistaa kädestä mahdollisen värin. Saa parametrina tarkasteltavan käden
+def isFlush(hand):             # Metodi, joka tarkistaa kadesta mahdollisen varin. Saa parametrina tarkasteltavan kaden
     firstcard = hand[0]
     suit = firstcard[1]
     returnable = False
@@ -31,7 +31,7 @@ def isFlush(hand):             # Metodi, joka tarkistaa kädestä mahdollisen v�
     return returnable
 
 
-def isStraight(hand):          # Metodi, joka tarkistaa kädestä mahdollisen suoran. Saa parametrina tarkasteltavan käden
+def isStraight(hand):          # Metodi, joka tarkistaa kadesta mahdollisen suoran. Saa parametrina tarkasteltavan kaden
     card = hand[0]
     cardnumber = card[0]
     returnable = False
@@ -54,7 +54,7 @@ def isStraight(hand):          # Metodi, joka tarkistaa kädestä mahdollisen su
     return returnable
 
 
-def isTwopair(hand):  # Metodi, joka tarkistaa kädestä mahdollisen kaksi pari. Saa parametrina tarkasteltavan käden
+def isTwopair(hand):  # Metodi, joka tarkistaa kadesta mahdollisen kaksi pari. Saa parametrina tarkasteltavan kaden
     returnable = False
     card1 = hand[0]
     cardnumber1 = card1[0]
@@ -77,7 +77,7 @@ def isTwopair(hand):  # Metodi, joka tarkistaa kädestä mahdollisen kaksi pari.
     return returnable
 
 
-def numberToletter(hand):         # Muuntaa ässän, kuninkaan, kuningattaren ja jätkän arvon kirjaimeksi tulosteeseen
+def numberToletter(hand):         # Muuntaa assan, kuninkaan, kuningattaren ja jatkan arvon kirjaimeksi tulosteeseen
     for i in range(0, 5):
         card = hand[i]
         cardnumber = card[0]
@@ -113,10 +113,10 @@ def deal(deck):
 
 def checkAndprintcards(hands):
     playernumber = 1
-    for x in hands:           # Käsien tulostus ja tarkistus, joka tulostaa joko etsityn käden tai "ei mitään haetuista"
+    for x in hands:           # Kasien tulostus ja tarkistus, joka tulostaa joko etsityn kaden tai "ei mitaan haetuista"
         printedhand = numberToletter(x[:])
         print("pelaajan " + str(playernumber) + " hand: " + str(printedhand))
-        x.sort()           # Järjestetään kädet järjestykseen pienimmästä suurimpaan käsien tarkistuksen helpottamiseksi
+        x.sort()           # Jarjestetaan kadet jarjestykseen pienimmasta suurimpaan kasien tarkistuksen helpottamiseksi
         if isFlush(x):
             if isStraight(x):
                 print("pelaajalla " + str(playernumber) + " Varisuora")
@@ -138,4 +138,4 @@ def start():
     checkAndprintcards(hands)
 
 
-start()  # Ohjelman käynnistävä komento
+start()  # Ohjelman kaynnistava komento
