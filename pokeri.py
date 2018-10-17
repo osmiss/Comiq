@@ -1,7 +1,7 @@
 import random
 
 
-def luoPakka():
+def luoPakka():            # Metodi, joka muodostaa pakan. Pakka on lista, jossa kortit ovat tuple muotoisia muuttujia
     numerot = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     maat = ["pata", "risti", "ruutu", "hertta"]
     pakka = []
@@ -18,7 +18,7 @@ def luoPakka():
     return pakka
 
 
-def onkoVari(kasi):
+def onkoVari(kasi):             # Metodi, joka tarkistaa kädestä mahdollisen värin. Saa parametrina tarkasteltavan käden
     tarkasteltavakortti = kasi[0]
     maa = tarkasteltavakortti[1]
     palautettava = False
@@ -31,12 +31,11 @@ def onkoVari(kasi):
     return palautettava
 
 
-def onkoSuora(kasi):
+def onkoSuora(kasi):           # Metodi, joka tarkistaa kädestä mahdollisen suoran. Saa parametrina tarkasteltavan käden
     kortti = kasi[0]
     kn = kortti[0]
     palautettava = False
-
-    for i in range (1, 5):
+    for i in range(1, 5):
         seuraavakortti = kasi[i]
         if kn + 1 == seuraavakortti[0]:
             palautettava = True
@@ -55,7 +54,7 @@ def onkoSuora(kasi):
     return palautettava
 
 
-def onkoKaksiparia(kasi):
+def onkoKaksiparia(kasi):  # Metodi, joka tarkistaa kädestä mahdollisen kaksi pari. Saa parametrina tarkasteltavan käden
     palautettava = False
     kortti1 = kasi[0]
     kn1 = kortti1[0]
@@ -78,7 +77,7 @@ def onkoKaksiparia(kasi):
     return palautettava
 
 
-def numeroidenMuunto(kasi):
+def numeroidenMuunto(kasi):         # Muuntaa ässän, kuninkaan, kuningattaren ja jätkän arvon kirjaimeksi tulosteeseen
     for i in range(0, 5):
         kortti = kasi[i]
         kn = kortti[0]
@@ -97,13 +96,13 @@ def numeroidenMuunto(kasi):
     return kasi
 
 
-pakka = luoPakka()
-random.shuffle(pakka)
+pakka = luoPakka()      # Ohjelman alku, josta kutsutaan pakan luovaa metodia
+random.shuffle(pakka)   # Pakan sekoitus
 kasi1 = []
 kasi2 = []
 kasi3 = []
 kadet = [kasi1, kasi2, kasi3]
-while len(kasi1) < 5:
+while len(kasi1) < 5:           # Korttien jako pelaajille
     kasi1.append(pakka[0])
     del pakka[0]
     kasi2.append(pakka[0])
@@ -111,10 +110,10 @@ while len(kasi1) < 5:
     kasi3.append(pakka[0])
     del pakka[0]
 pelaajannumero = 1
-for x in kadet:
+for x in kadet:               # Käsien tulostus ja tarkistus, joka tulostaa joko etsityn käden tai "ei mitään haetuista"
     tulostettava = numeroidenMuunto(x[:])
     print("pelaajan " + str(pelaajannumero) + " kasi: " + str(tulostettava))
-    x.sort()
+    x.sort()               # Järjestetään kädet järjestykseen pienimmästä suurimpaan käsien tarkistuksen helpottamiseksi
     if onkoVari(x):
         if onkoSuora(x):
             print("pelaajalla " + str(pelaajannumero) + " Varisuora")
