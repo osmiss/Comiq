@@ -106,7 +106,7 @@ def isTwopair(hand):  # Metodi, joka tarkistaa kadesta mahdollisen kaksi pari. S
 
 
 def numberToletter(hand):         # Muuntaa assan, kuninkaan, kuningattaren ja jatkan arvon kirjaimeksi tulosteeseen
-    for i in range(0, 4):
+    for i in range(0, 5):
         card = hand[i]
         cardnumber = card.number
         if cardnumber == 1:
