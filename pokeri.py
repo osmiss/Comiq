@@ -9,16 +9,12 @@ class Card(object):
     def __lt__(self, other):
         return self.number < other.number
 
-    '''def __str__(self):
-        return "(" + self.number + ", " + self.suit + ")"
-'''
 
 def makeCard(number, suit):
     card = Card(number, suit)
     return card
 
-'''Metodi, joka muodostaa pakan. Pakka on lista,
-jossa kortit ovat Card luokasta muodostettuja object muuttujia'''
+
 def createDeck():
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     suits = ["pata", "risti", "ruutu", "hertta"]
@@ -36,7 +32,7 @@ def createDeck():
     return deck
 
 
-def isFlush(hand):             # Metodi, joka tarkistaa kadesta mahdollisen varin. Saa parametrina tarkasteltavan kaden
+def isFlush(hand):
     firstcard = hand[0]
     suit = firstcard.suit
     returnable = False
@@ -49,7 +45,7 @@ def isFlush(hand):             # Metodi, joka tarkistaa kadesta mahdollisen vari
     return returnable
 
 
-def isStraight(hand):          # Metodi, joka tarkistaa kadesta mahdollisen suoran. Saa parametrina tarkasteltavan kaden
+def isStraight(hand):
     card = hand[0]
     cardnumber = card.number
     card2 = hand[1]
@@ -82,7 +78,7 @@ def isStraight(hand):          # Metodi, joka tarkistaa kadesta mahdollisen suor
     return returnable
 
 
-def isTwopair(hand):  # Metodi, joka tarkistaa kadesta mahdollisen kaksi pari. Saa parametrina tarkasteltavan kaden
+def isTwopair(hand):
     returnable = False
     card1 = hand[0]
     cardnumber1 = card1.number
@@ -105,7 +101,7 @@ def isTwopair(hand):  # Metodi, joka tarkistaa kadesta mahdollisen kaksi pari. S
     return returnable
 
 
-def numberToletter(hand):         # Muuntaa assan, kuninkaan, kuningattaren ja jatkan arvon kirjaimeksi tulosteeseen
+def numberToletter(hand):
     for i in range(0, 5):
         card = hand[i]
         cardnumber = card.number
@@ -129,7 +125,7 @@ def deal(deck):
     hand2 = []
     hand3 = []
     hands = [hand1, hand2, hand3]
-    while len(hand1) < 5:           # korttien jako pelaajille
+    while len(hand1) < 5:
         hand1.append(deck[0])
         del deck[0]
         hand2.append(deck[0])
@@ -140,9 +136,8 @@ def deal(deck):
 
 
 def checkHand(hand):
-    # Jarjestetaan kadet jarjestykseen pienimmasta suurimpaan kasien tarkistuksen helpottamiseksi
     sortedhand = sorted(hand)
-    for i in range(0, len(hand)):           # Kasien tarkistus, joka palauttaa etsityn kaden tai "ei mitaan haetuista"
+    for i in range(0, len(hand)):
         if isFlush(sortedhand):
             if isStraight(sortedhand):
                 return "Varisuora"
@@ -184,8 +179,8 @@ def printResults(hands):
 def start():
     deck = createDeck()  # Ohjelman alku, josta kutsutaan pakan muodostavaa metodia
     random.shuffle(deck)  # Pakan sekoitus
-    hands = deal(deck)
-    printResults(hands)
+    hands = deal(deck)  # Korttien jako
+    printResults(hands)     # Kasien ja tuloksien tulostus
 
 
 if __name__ == "__main__":
