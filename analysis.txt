@@ -1,0 +1,7 @@
+Esimerkkituloste:
+Pelaajalla 1 kasi: (8, 'ruutu')(4, 'ruutu')(9, 'pata')(4, 'risti')(5, 'risti')
+Pelaajalla 2 kasi: (7, 'ruutu')(3, 'pata')(3, 'hertta')(7, 'risti')('Q', 'ruutu')
+Pelaajalla 3 kasi: (6, 'hertta')(5, 'ruutu')(6, 'pata')(6, 'ruutu')(9, 'risti')
+Pelaajalla 1: Ei mitaan haetuista
+Pelaajalla 2: Kaksi paria
+Pelaajalla 3: Ei mitaan haetuista

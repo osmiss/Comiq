@@ -12,7 +12,7 @@ straight3 = [makeCard(4, "hertta"), makeCard(5, "ruutu"), makeCard(6, "pata"), m
              makeCard(8, "hertta")]
 flush = [makeCard(4, "hertta"), makeCard(6, "hertta"), makeCard(8, "hertta"), makeCard(10, "hertta"),
          makeCard(11, "hertta")]
-twopair1 = [makeCard(1, "hertta"), makeCard(1, "ruutu"), makeCard(7, "hertta"), makeCard(7, "risti"),
+twopair1 = [makeCard(1, "hertta"), makeCard(1, "ruutu"), makeCard(7, "pata"), makeCard(7, "risti"),
             makeCard(9, "hertta")]
 twopair2 = [makeCard(5, "ruutu"), makeCard(5, "hertta"), makeCard(6, "pata"), makeCard(11, "hertta"),
             makeCard(11, "pata")]
